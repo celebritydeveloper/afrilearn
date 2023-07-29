@@ -1196,6 +1196,11 @@
   dependencies:
     "@types/hammerjs" "^2.0.36"
 
+"@expo-google-fonts/andika@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/andika/-/andika-0.2.3.tgz#e2faec942a284c6834eb528ecc0abd30c178d7bd"
+  integrity sha512-gsPOD2FET8CBp17uX102h6pdSf71NmYrdos1U1vup8GEmqO61wpMU6lf92uUPqULpSUks98NL+cxTV1Ztlpm7g==
+
 "@expo/bunyan@4.0.0", "@expo/bunyan@^4.0.0":
   version "4.0.0"
   resolved "https://registry.npmjs.org/@expo/bunyan/-/bunyan-4.0.0.tgz"
@@ -3539,7 +3544,7 @@ expo-router@^1.2.0:
     schema-utils "^4.0.1"
     url "^0.11.0"
 
-expo-splash-screen@*, expo-splash-screen@~0.18.1:
+expo-splash-screen@~0.18.1:
   version "0.18.2"
   resolved "https://registry.npmjs.org/expo-splash-screen/-/expo-splash-screen-0.18.2.tgz"
   integrity sha512-fsiKmyn/lbJtV6Uor6wSvl21fScOidFzmB/HHShQJJOu2TBN/vqMvhPu/r0bF5NVk8Wi64r98hiWY1EEsbW03w==
