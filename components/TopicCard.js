@@ -2,13 +2,16 @@ import { StyleSheet, View, Text, Image, Pressable } from "react-native";
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
 import global from "../styles/global";
-import { LeaderBadgeIcon, ChartIcon, CircleIcon, AfriCurrencyColorIcon } from "../assets/svgs";
+import { StarIcon } from "../assets/svgs";
 
 
-export default function PerformanceCard() {
+export default function TopicCard() {
     return (
-        <View style={[styles.inviteCard, global.rowSpaceBetween,]}>
-            
+        <View style={[styles.card, global.row,]}>
+            <View style={[styles.star, global.rowCenter]}>
+                <StarIcon />
+            </View>
+            <Text style={styles.text}>Living things and non-living things</Text>
         </View>
         
     )
@@ -17,23 +20,25 @@ export default function PerformanceCard() {
 
 const styles = StyleSheet.create({
 
-    inviteCard: {
+    card: {
         height: 120,
         backgroundColor: COLORS.white,
         borderRadius: 30,
-        borderWidth: 3,
+        borderLeftWidth: 6,
+        borderBottomWidth: 6,
+        borderRightWidth: 3,
+        borderTopWidth: 3,
         borderColor: COLORS.nutralColor,
-        gap: 13,
-        marginRight: 10,
-        paddingHorizontal: 14,
-        width: 120
+        gap: 30,
+        paddingHorizontal: 18,
+        width: "100%",
     },
 
     text: {
         color: COLORS.dark,
-        fontSize: 16,
+        fontSize: 17,
         fontFamily: "Andika_700Bold",
-        lineHeight: 23,
+        width: 200
     },
 
     button: {
@@ -57,11 +62,12 @@ const styles = StyleSheet.create({
         lineHeight: 35
     },
 
-    amount: {
-        color: COLORS.darkBrown,
-        fontSize: 16,
-        fontFamily: "Andika_700Bold",
-        lineHeight: 35
+    star: {
+        backgroundColor: COLORS.darkGray,
+        borderRadius: 100,
+        borderWidth: 4,
+        height: 95,
+        width: 95
     },
     
 })

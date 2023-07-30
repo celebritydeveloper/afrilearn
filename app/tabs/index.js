@@ -8,7 +8,9 @@ import LeaderCard from "../../components/LeaderCard";
 import InviteFriend from "../../components/InviteFriend";
 import pattern from "../../assets/images/pattern.svg";
 import { Asset } from "expo-asset";
-import PerformanceCard from "../../components/PerformanaceCard";
+import PerformanceCard from "../../components/PerformanceCard";
+import LessonVideo from "../../components/LessonVideo";
+import TopicCard from "../../components/TopicCard";
 
 
 
@@ -110,7 +112,33 @@ export default function Home() {
                         </ScrollView>
                     </View>
 
-                    
+
+                    <View>
+                        <View style={[global.rowSpaceBetween, styles.leaderHeader]}>
+                            <Text style={styles.leaderTitleLeft}>Continue watching</Text>
+                            <View style={[global.row, { gap: 8}]}>
+                                <Text style={styles.leaderTitleRight}>View all</Text>
+                                <Iconify icon="maki:arrow" size={22} color={COLORS.blue} />
+                            </View>
+                        </View>
+
+                        <ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false }>
+                            <LessonVideo subject="Biology" topic="Circulatory system" />
+                            <LessonVideo subject="Chemistry" topic="Acids, Base, and Salts" />
+                            <LessonVideo subject="Biology" topic="Living things and non-living things" />
+                        </ScrollView>
+                    </View>
+
+
+                    <View>
+                        <View style={[global.rowSpaceBetween, styles.leaderHeader]}>
+                            <Text style={styles.leaderTitleLeft}>Master next topic</Text>
+                        </View>
+
+                        <TopicCard />
+
+                    </View>
+
                 </ScrollView>
             </ImageBackground>
 
@@ -253,7 +281,7 @@ const styles = StyleSheet.create({
     },
 
     leaderHeader: {
-        marginBottom: 17
+        marginBottom: 15
     },
 
     leaderTitleLeft: {
@@ -271,6 +299,12 @@ const styles = StyleSheet.create({
 
     performanceContainer: {
         backgroundColor: COLORS.gray,
+        marginVertical: 35,
+        paddingVertical: 20
+    },
+
+
+    watchContainer: {
         marginVertical: 35,
         paddingVertical: 20
     },

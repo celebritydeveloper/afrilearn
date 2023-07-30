@@ -7,7 +7,7 @@ export default {
     lightRed: "lightred",
     darkRed: "darkred",
     background: "#F9F9FF",
-    darkGray: "#ECEEF5",
+    darkGray: "#9B9B9B",
     green: "#1CAE81",
     platinum: "#E5E4E2",
     red:  "red",
@@ -30,5 +30,7 @@ export default {
     brandGreen: "#289B41",
     dark: "#191C2D",
     brown: "#FFDDB5",
-    darkBrown: "#9B4128"
+    darkBrown: "#9B4128",
+    lightYellow: "#FFFCE2",
+    yellow: "#FFF961"
 }
