@@ -26,5 +26,6 @@ export default {
     disabledTextGray: "#DDDFE4",
     deepBlue: "#016E89",
     nutralColor: "#41424F",
-    afrigreen: "#45CD81"
+    afrigreen: "#45CD81",
+    dark: "#191C2D"
 }

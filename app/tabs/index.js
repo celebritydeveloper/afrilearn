@@ -3,7 +3,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../../constants";
 import global from "../../styles/global";
-import { AfriCurrencyIcon, NairaIcon } from "../../assets/svgs";
+import { AfriCurrencyIcon, NairaIcon, BarChartIcon } from "../../assets/svgs";
 
 
 export default function Home() {
@@ -55,7 +55,21 @@ export default function Home() {
                         <Text style={styles.point}>45</Text>
                     </View>
                 </View>
+
+
+                <View style={[styles.assessmentCard, global.rowSpaceBetween]}>
+                    <View style={[styles.assessmentIcon, global.rowCenter]}>
+                        <BarChartIcon />
+                    </View>
+                    <View>
+                        <Text style={styles.assessmentTitle}>Take assessment test</Text>
+                        <Text style={styles.assessmentSubTitle}>See how you perform against all learners</Text>
+                    </View>
+                    <Iconify icon="maki:arrow" size={24} color={COLORS.nutralColor} />
+                </View>
             </View>
+
+            
             
         </SafeAreaProvider>
         
@@ -117,6 +131,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 2,
         borderTopWidth: 2,
         borderColor: "black",
+        marginBottom: 30,
         padding: 20
     },
 
@@ -149,6 +164,42 @@ const styles = StyleSheet.create({
         color: COLORS.white,
         fontSize: 13,
         fontFamily: "Andika_700Bold"
-    }
+    },
+
+    assessmentCard: {
+        height: 120,
+        backgroundColor: COLORS.white,
+        borderRadius: 30,
+        borderLeftWidth: 6,
+        borderBottomWidth: 6,
+        borderRightWidth: 2,
+        borderTopWidth: 2,
+        borderColor: COLORS.nutralColor,
+        gap: 10,
+        padding: 12,
+        width: "100%",
+        
+    },
+
+
+    assessmentIcon: {
+        borderWidth: 3,
+        borderRadius: 100,
+        height: 45,
+        width: 45,
+    },
+
+    assessmentTitle: {
+        color: COLORS.dark,
+        fontSize: 16,
+        fontFamily: "Andika_700Bold",
+    },
+
+    assessmentSubTitle: {
+        color: COLORS.nutralColor,
+        fontSize: 14,
+        fontFamily: "Andika_400Regular",
+        
+    },
     
 })
