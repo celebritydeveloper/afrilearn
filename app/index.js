@@ -1,7 +1,18 @@
 import { StyleSheet, View, Text } from "react-native";
 import { Link } from "expo-router";
+import { useFonts, Andika_400Regular, Andika_700Bold } from '@expo-google-fonts/andika';
 
-export default function Page() {
+export default function App() {
+    let [fontsLoaded] = useFonts({
+        Andika_400Regular,
+        Andika_700Bold
+    });
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
+      
     return (
         <View style={styles.container}>
             <View style={styles.main}>
@@ -29,11 +40,12 @@ const styles = StyleSheet.create({
 
     title: {
         fontSize: 20,
-        fontWeight: "bold"
+        fontFamily: "Andika_700Bold",
     },
 
     subTitle: {
         fontSize: 15,
+        fontFamily: "Andika_400Regular",
         fontWeight: "normal"
     }
     
