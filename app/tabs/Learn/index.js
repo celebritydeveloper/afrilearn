@@ -3,42 +3,35 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../../../constants";
 import global from "../../../styles/global";
-import { AfriCurrencyIcon, NairaIcon, BarChartIcon, AskAfriGreenIcon } from "../../../assets/svgs";
-import LeaderCard from "../../../components/LeaderCard";
-import InviteFriend from "../../../components/InviteFriend";
-import pattern from "../../../assets/images/pattern.svg";
+import { AfriHappyIcon, AskAfriGreenIcon, CoinIcon, AfriCurrencyBlackIcon } from "../../../assets/svgs";
 import { Asset } from "expo-asset";
-import PerformanceCard from "../../../components/PerformanceCard";
-import LessonVideo from "../../../components/LessonVideo";
-import TopicCard from "../../../components/TopicCard";
 import LearnCard from "../../../components/LearnCard";
 
 
 
 export default function Learn() {
-    const image = {uri: pattern};
+
     return (
         <SafeAreaProvider style={{ flex: 1}}>
             <View style={[global.rowSpaceBetween, styles.header ]}>
                 <View style={[{columnGap: 10}, global.row]}>
-                    <View style={[global.rowCenter, styles.profileImage]}>
-                        <Image
-                            style={styles.tinyLogo}
-                            source={{
-                                uri: "https://images.unsplash.com/photo-1536337005238-94b997371b40?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHwxMnx8Ym95JTIwaW4lMjBjbGFzc3xlbnwwfHx8fDE2OTA2Nzg1OTl8MA&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450",
-                            }}
-                        />
+                    <View >
+                        <AfriHappyIcon />
                     </View>
                     <Text style={styles.userName}>Learn</Text>
                 </View>
-                <View style={ global.rowSpaceBetween}>
-                    <Iconify icon="fa6-regular:bell" size={26} color={COLORS.nutralColor} />
+                <View style={[global.rowCenter, { gap: 7 }]}>
+                    <CoinIcon />
+                    <View style={[global.rowCenter, { gap: 2 }]}>
+                        <AfriCurrencyBlackIcon />
+                        <Text style={styles.coin}>0.16</Text>
+                    </View>
                 </View>
             </View>
 
             <ImageBackground source={{uri: Asset.fromModule(require("../../../assets/images/pattern.png")).uri}} resizeMode="repeat" style={{  flex: 1, width: "100%"}}>
 
-                <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingTop: 20, paddingBottom: 100 }}>
+                <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingTop: 20, paddingBottom: 70 }}>
                      
                     <LearnCard title="Master a subject" text="Master topics in any subject and win exciting prizes"
                         icon={<Iconify icon="mdi:star-circle" size={40} color={COLORS.brandGreen} />}
@@ -99,7 +92,7 @@ const styles = StyleSheet.create({
     },
 
     userName: {
-        fontSize: 16,
+        fontSize: 17,
         fontFamily: "Andika_700Bold",
     },
 
@@ -140,8 +133,8 @@ const styles = StyleSheet.create({
     },
 
     coin: {
-        color: COLORS.white,
-        fontSize: 20,
+        color: COLORS.dark,
+        fontSize: 13,
         fontFamily: "Andika_700Bold"
     },
 
