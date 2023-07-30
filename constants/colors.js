@@ -13,7 +13,7 @@ export default {
     red:  "red",
     mainBlue: "#05008E",
     orange: "#FFA26B",
-    blue: "#2019E4",
+    blue: "#1D66F2",
     lightblue: "#83E5F7",
     primary: "#9A6AFF",
     transparentGray: "rgba(32,25,228, 0.8)",
@@ -26,6 +26,7 @@ export default {
     disabledTextGray: "#DDDFE4",
     deepBlue: "#016E89",
     nutralColor: "#41424F",
-    afrigreen: "#45CD81",
+    afriGreen: "#45CD81",
+    brandGreen: "#289B41",
     dark: "#191C2D"
 }

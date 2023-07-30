@@ -17,7 +17,7 @@ export default () => {
                 options={{
                     title: "Home",
                     tabBarLabelStyle: { fontSize: 14, fontWeight: "bold", color: COLORS.nutralColor },
-                    tabBarIcon: ({ color, focused }) => ( <Iconify icon="solar:home-2-bold" color={ focused ? COLORS.afrigreen : COLORS.black } size={ 38 } /> ),
+                    tabBarIcon: ({ color, focused }) => ( <Iconify icon="solar:home-2-bold" color={ focused ? COLORS.afriGreen : COLORS.black } size={ 38 } /> ),
                     tabBarActiveTintColor: COLORS.black, tabBarShowLabel: true, tabBarLabel: "Home",
                 }}
             />
@@ -27,7 +27,7 @@ export default () => {
                 options={{
                     title: "Learn",
                     tabBarLabelStyle: { fontSize: 14, fontWeight: "bold", color: COLORS.nutralColor },
-                    tabBarIcon: ({ color, focused }) => ( <Iconify icon="mingcute:game-2-line" color={ focused ? COLORS.afrigreen : COLORS.black } size={ 40 } /> ),
+                    tabBarIcon: ({ color, focused }) => ( <Iconify icon="mingcute:game-2-line" color={ focused ? COLORS.afriGreen : COLORS.black } size={ 40 } /> ),
                     tabBarActiveTintColor: COLORS.black, tabBarShowLabel: true, tabBarLabel: "Learn",
                 }}
             />
@@ -47,7 +47,7 @@ export default () => {
                 options={{
                     title: "AfriTown",
                     tabBarLabelStyle: { fontSize: 14, fontWeight: "bold", color: COLORS.nutralColor },
-                    tabBarIcon: ({ color, focused }) => ( <Iconify icon="fluent:people-12-regular" color={ focused ? COLORS.afrigreen : COLORS.black } size={ 39 } /> ),
+                    tabBarIcon: ({ color, focused }) => ( <Iconify icon="fluent:people-12-regular" color={ focused ? COLORS.afriGreen : COLORS.black } size={ 39 } /> ),
                     tabBarActiveTintColor: COLORS.black, tabBarShowLabel: true, tabBarLabel: "AfriTown",
                 }}
             />

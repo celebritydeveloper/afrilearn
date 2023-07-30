@@ -1,5 +1,5 @@
 import React from "react"
-import Svg, { G, Path, Mask, Defs, ClipPath } from "react-native-svg";
+import Svg, { G, Path, Mask, Defs, ClipPath, Rect, Circle } from "react-native-svg";
 
 
 
@@ -296,6 +296,66 @@ export function BarChartIcon(props) {
         d="M19.885.219H3.115A2.403 2.403 0 00.719 2.615v16.77a2.403 2.403 0 002.396 2.396h16.77a2.403 2.403 0 002.396-2.396V2.615A2.403 2.403 0 0019.885.219zM6.708 16.989c-.659 0-1.198-.538-1.198-1.197v-5.99c0-.659.54-1.198 1.198-1.198.66 0 1.198.54 1.198 1.198v5.99c0 .659-.539 1.198-1.198 1.198zm4.792 0c-.659 0-1.198-.538-1.198-1.197V6.208c0-.659.54-1.198 1.198-1.198.659 0 1.198.54 1.198 1.198v9.584c0 .659-.54 1.198-1.198 1.198zm4.792 0c-.66 0-1.198-.538-1.198-1.197v-2.396c0-.659.539-1.198 1.198-1.198.659 0 1.198.539 1.198 1.198v2.396c0 .659-.54 1.198-1.198 1.198z"
         fill="#289B41"
       />
+    </Svg>
+  )
+}
+
+
+export function LeaderBadgeIcon(props) {
+  return (
+    <Svg
+      width={21}
+      height={21}
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Path
+        d="M16 1.6L14.4 0c-.92.512-2.08.8-3.2.8S8.912.504 8 0c-.912.504-2.08.8-3.2.8S2.52.512 1.6 0L0 1.6s1.6 1.6 1.6 3.2S0 9.6 0 11.2C0 14.4 8 16 8 16s8-1.6 8-4.8c0-1.6-1.6-4.8-1.6-6.4 0-1.6 1.6-3.2 1.6-3.2zm-5.56 9.96l-2.464-1.488L5.52 11.56l.656-2.8L4 6.888l2.864-.248L7.976 4l1.12 2.632 2.864.248-2.176 1.872.656 2.808z"
+        fill="#DC8013"
+      />
+    </Svg>
+  )
+}
+
+
+export function ChartIcon(props) {
+  return (
+    <Svg
+      width={13}
+      height={13}
+      viewBox="0 0 13 13"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Rect x={9.09998} width={3.25} height={13} rx={1.625} fill="#289B41" />
+      <Rect
+        x={4.55005}
+        y={3.8999}
+        width={3.25}
+        height={9.1}
+        rx={1.625}
+        fill="#289B41"
+      />
+      <Rect y={7.1499} width={3.25} height={5.85} rx={1.625} fill="#289B41" />
+    </Svg>
+  )
+}
+
+
+export function CircleIcon(props) {
+  return (
+    <Svg
+      width={3}
+      height={4}
+      viewBox="0 0 2 3"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <Circle cx={1} cy={1.5} r={1} fill="#41424F" />
     </Svg>
   )
 }

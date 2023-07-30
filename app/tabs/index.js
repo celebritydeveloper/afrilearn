@@ -1,9 +1,10 @@
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../../constants";
 import global from "../../styles/global";
-import { AfriCurrencyIcon, NairaIcon, BarChartIcon } from "../../assets/svgs";
+import { AfriCurrencyIcon, NairaIcon, BarChartIcon, LeaderBadgeIcon } from "../../assets/svgs";
+import LeaderCard from "../../components/LeaderCard";
 
 
 export default function Home() {
@@ -30,8 +31,7 @@ export default function Home() {
                 </View>
             </View>
 
-            
-            <View style={styles.container}>
+            <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 20 }}>
                 <View style={styles.card}>
                     <View style={[global.rowFlexEnd, { gap: 12}]}>
                         <Text style={styles.wallet}>AfriWallet</Text>
@@ -67,7 +67,23 @@ export default function Home() {
                     </View>
                     <Iconify icon="maki:arrow" size={24} color={COLORS.nutralColor} />
                 </View>
-            </View>
+
+                <View style={[global.rowSpaceBetween, styles.leaderHeader]}>
+                    <Text style={styles.leaderTitleLeft}>Top scorers</Text>
+                    <View style={[global.row, { gap: 8}]}>
+                        <Text style={styles.leaderTitleRight}>Leaderboard</Text>
+                        <Iconify icon="maki:arrow" size={22} color={COLORS.blue} />
+                    </View>
+                </View>
+
+                <ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false }>
+                    <LeaderCard />
+                    <LeaderCard />
+                    <LeaderCard />
+                </ScrollView>
+
+                
+            </ScrollView>
 
             
             
@@ -126,8 +142,8 @@ const styles = StyleSheet.create({
         height: 191,
         backgroundColor: "#289B41",
         borderRadius: 30,
-        borderLeftWidth: 6,
-        borderBottomWidth: 6,
+        borderLeftWidth: 7,
+        borderBottomWidth: 7,
         borderRightWidth: 2,
         borderTopWidth: 2,
         borderColor: "black",
@@ -176,11 +192,11 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
         borderColor: COLORS.nutralColor,
         gap: 10,
+        marginBottom: 40,
         padding: 12,
         width: "100%",
         
     },
-
 
     assessmentIcon: {
         borderWidth: 3,
@@ -200,6 +216,22 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: "Andika_400Regular",
         
+    },
+
+    leaderHeader: {
+        marginBottom: 17
+    },
+
+    leaderTitleLeft: {
+        color: COLORS.dark,
+        fontSize: 18,
+        fontFamily: "Andika_700Bold",
+    },
+
+    leaderTitleRight: {
+        color: COLORS.blue,
+        fontSize: 14,
+        fontFamily: "Andika_700Bold",
     },
     
 })
