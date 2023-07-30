@@ -1,13 +1,13 @@
 export default {
     white: "#fff",
     black: "#333333",
-    gray: "#808080",
+    gray: "#ECEEF5",
     lightGray: "#F9F9FF",
     lighterGray: "#707070",
     lightRed: "lightred",
     darkRed: "darkred",
     background: "#F9F9FF",
-    darkGray: "#A9A9A9",
+    darkGray: "#ECEEF5",
     green: "#1CAE81",
     platinum: "#E5E4E2",
     red:  "red",
@@ -28,5 +28,7 @@ export default {
     nutralColor: "#41424F",
     afriGreen: "#45CD81",
     brandGreen: "#289B41",
-    dark: "#191C2D"
+    dark: "#191C2D",
+    brown: "#FFDDB5",
+    darkBrown: "#9B4128"
 }

@@ -1,13 +1,19 @@
-import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView, ImageBackground } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../../constants";
 import global from "../../styles/global";
 import { AfriCurrencyIcon, NairaIcon, BarChartIcon, LeaderBadgeIcon } from "../../assets/svgs";
 import LeaderCard from "../../components/LeaderCard";
+import InviteFriend from "../../components/InviteFriend";
+import pattern from "../../assets/images/pattern.svg";
+import { Asset } from "expo-asset";
+import PerformanceCard from "../../components/PerformanaceCard";
+
 
 
 export default function Home() {
+    const image = {uri: pattern};
     return (
         <SafeAreaProvider style={{ flex: 1}}>
             <View style={[global.rowSpaceBetween, styles.header ]}>
@@ -31,59 +37,82 @@ export default function Home() {
                 </View>
             </View>
 
-            <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingVertical: 20 }}>
-                <View style={styles.card}>
-                    <View style={[global.rowFlexEnd, { gap: 12}]}>
-                        <Text style={styles.wallet}>AfriWallet</Text>
-                        <Iconify icon="maki:arrow" size={20} color={COLORS.white} />
+            <ImageBackground source={{uri: Asset.fromModule(require("../../assets/images/pattern.png")).uri}} resizeMode="repeat" style={{  flex: 1, width: "100%"}}>
+
+                <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingTop: 20, paddingBottom: 100 }}>
+                    <View style={styles.topCard}>
+                        <ImageBackground source={{uri: Asset.fromModule(require("../../assets/images/pattern.png")).uri}} resizeMode="repeat" style={styles.topCardImage}>
+                            <View style={{paddingHorizontal: 20 }}>
+                                <View style={[global.rowFlexEnd, { gap: 12}]}>
+                                    <Text style={styles.wallet}>AfriWallet</Text>
+                                    <Iconify icon="maki:arrow" size={20} color={COLORS.white} />
+                                </View>
+
+                                <View>
+                                    <View style={[global.row, { gap: 1}]}>
+                                        <AfriCurrencyIcon />
+                                        <Text style={styles.coin}>5260.34</Text>
+                                    </View>
+
+                                    <View style={[global.row, { gap: 3}]}>
+                                        <NairaIcon />
+                                        <Text style={styles.amount}>2500.00</Text>
+                                    </View>
+                                </View>
+
+                                <View style={[global.rowFlexEnd, { gap: 6}]}>
+                                    <Text style={styles.pointText}>Pts:</Text>
+                                    <Text style={styles.point}>45</Text>
+                                </View>
+                            </View>
+                        </ImageBackground>
                     </View>
 
-                    <View>
-                        <View style={[global.row, { gap: 1}]}>
-                            <AfriCurrencyIcon />
-                            <Text style={styles.coin}>5260.34</Text>
+
+                    <View style={[styles.assessmentCard, global.rowSpaceBetween]}>
+                        <View style={[styles.assessmentIcon, global.rowCenter]}>
+                            <BarChartIcon />
+                        </View>
+                        <View>
+                            <Text style={styles.assessmentTitle}>Take assessment test</Text>
+                            <Text style={styles.assessmentSubTitle}>See how you perform against all learners</Text>
+                        </View>
+                        <Iconify icon="maki:arrow" size={24} color={COLORS.nutralColor} />
+                    </View>
+
+                    <View style={[global.rowSpaceBetween, styles.leaderHeader]}>
+                        <Text style={styles.leaderTitleLeft}>Top scorers</Text>
+                        <View style={[global.row, { gap: 8}]}>
+                            <Text style={styles.leaderTitleRight}>Leaderboard</Text>
+                            <Iconify icon="maki:arrow" size={22} color={COLORS.blue} />
+                        </View>
+                    </View>
+
+                    <ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false } style={{ marginBottom: 35 }}>
+                        <LeaderCard />
+                        <LeaderCard />
+                        <LeaderCard />
+                    </ScrollView>
+
+                    <InviteFriend />
+
+                    <View style={styles.performanceContainer}>
+                        <View style={[global.rowSpaceBetween, styles.leaderHeader]}>
+                            <Text style={styles.leaderTitleLeft}>My overall average</Text>
+                            <View style={[global.row, { gap: 8}]}>
+                                <Text style={styles.leaderTitleRight}>Performance</Text>
+                                <Iconify icon="maki:arrow" size={22} color={COLORS.blue} />
+                            </View>
                         </View>
 
-                        <View style={[global.row, { gap: 3}]}>
-                            <NairaIcon />
-                            <Text style={styles.amount}>2500.00</Text>
-                        </View>
+                        <ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false }>
+                            <PerformanceCard />
+                        </ScrollView>
                     </View>
 
-                    <View style={[global.rowFlexEnd, { gap: 6}]}>
-                        <Text style={styles.pointText}>Pts:</Text>
-                        <Text style={styles.point}>45</Text>
-                    </View>
-                </View>
-
-
-                <View style={[styles.assessmentCard, global.rowSpaceBetween]}>
-                    <View style={[styles.assessmentIcon, global.rowCenter]}>
-                        <BarChartIcon />
-                    </View>
-                    <View>
-                        <Text style={styles.assessmentTitle}>Take assessment test</Text>
-                        <Text style={styles.assessmentSubTitle}>See how you perform against all learners</Text>
-                    </View>
-                    <Iconify icon="maki:arrow" size={24} color={COLORS.nutralColor} />
-                </View>
-
-                <View style={[global.rowSpaceBetween, styles.leaderHeader]}>
-                    <Text style={styles.leaderTitleLeft}>Top scorers</Text>
-                    <View style={[global.row, { gap: 8}]}>
-                        <Text style={styles.leaderTitleRight}>Leaderboard</Text>
-                        <Iconify icon="maki:arrow" size={22} color={COLORS.blue} />
-                    </View>
-                </View>
-
-                <ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false }>
-                    <LeaderCard />
-                    <LeaderCard />
-                    <LeaderCard />
+                    
                 </ScrollView>
-
-                
-            </ScrollView>
+            </ImageBackground>
 
             
             
@@ -138,9 +167,9 @@ const styles = StyleSheet.create({
         fontWeight: "normal"
     },
 
-    card: {
+    topCard: {
         height: 191,
-        backgroundColor: "#289B41",
+        backgroundColor: COLORS.brandGreen,
         borderRadius: 30,
         borderLeftWidth: 7,
         borderBottomWidth: 7,
@@ -148,7 +177,12 @@ const styles = StyleSheet.create({
         borderTopWidth: 2,
         borderColor: "black",
         marginBottom: 30,
-        padding: 20
+    },
+
+    topCardImage: {
+        flex: 1,
+        justifyContent: "center",
+        width: "100%"
     },
 
     wallet: {
@@ -224,7 +258,7 @@ const styles = StyleSheet.create({
 
     leaderTitleLeft: {
         color: COLORS.dark,
-        fontSize: 18,
+        fontSize: 17,
         fontFamily: "Andika_700Bold",
     },
 
@@ -232,6 +266,13 @@ const styles = StyleSheet.create({
         color: COLORS.blue,
         fontSize: 14,
         fontFamily: "Andika_700Bold",
+    },
+
+
+    performanceContainer: {
+        backgroundColor: COLORS.gray,
+        marginVertical: 35,
+        paddingVertical: 20
     },
     
 })

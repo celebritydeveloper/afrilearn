@@ -119,12 +119,14 @@ const styles = StyleSheet.create({
         color: COLORS.nutralColor,
         fontSize: 12,
         fontFamily: "Andika_400Regular",
+        lineHeight: 17,
     },
 
     leaderPoint: {
         color: COLORS.dark,
         fontSize: 12,
-        fontFamily: "Andika_700Bold"
+        fontFamily: "Andika_700Bold",
+        lineHeight: 17,
     },
 
     assessmentSubTitle: {
