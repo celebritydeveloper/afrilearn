@@ -7,9 +7,9 @@ import global from "../styles/global";
 import { AfriHappyIcon, AskAfriGreenIcon, CoinIcon, AfriCurrencyBlackIcon } from "../assets/svgs";
 import { Asset } from "expo-asset";
 import LearnCard from "../components/LearnCard";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import QuestionCard from "../components/QuestionCard";
-import Animated from "react-native-reanimated";
+import Animated, { interpolate, useSharedValue } from "react-native-reanimated";
 import QuizData from "../data/QuizData";
 import Timer from "../components/Timer";
 
@@ -17,14 +17,13 @@ import Timer from "../components/Timer";
 
 export default function Questions() {
     const examQuestions = QuizData.questions;
-    const [progress, setProgress] = useState(new Animated.Value(0));
+    const router = useRouter();
+    //const [progress, setProgress] = useState(new Animated.Value(0));
+    const progress = useSharedValue(0);
     const [currentQuestionIndex, setCurrentQuestionIndex ] = useState(0);
     
 
-    const progressAnimation = progress.interpolate({
-        inputRange: [0, examQuestions.length],
-        outputRange: ["0%", "100%"]
-    });
+    const progressAnimation = interpolate(progress, [0, examQuestions.length], ["0%", "100%"]);
 
     const handlePrev = () => {
         setCurrentQuestionIndex(currentQuestionIndex - 1)
@@ -40,9 +39,9 @@ export default function Questions() {
     return (
         <SafeAreaProvider style={{ flex: 1}}>
             <View style={[global.rowSpaceBetween, styles.header ]}>
-                <View style={[{columnGap: 10}, global.row]}>
+                <TouchableWithoutFeedback style={[{columnGap: 10}, global.row]} onPress={() => router.back()}>
                     <Iconify icon="iconamoon:close-bold" size={35} color={COLORS.nutralColor} />
-                </View>
+                </TouchableWithoutFeedback>
                 <View style={[global.rowCenter, { gap: 20 }]}>
                     <Text style={styles.steps}>{ currentQuestionIndex + 1}/{ examQuestions.length }</Text>
                     <Timer hours={2} minutes={30} seconds={0} />
@@ -70,6 +69,8 @@ export default function Questions() {
                         <Text style={styles.friend}>Ask a friend</Text>
                         <Iconify icon="humbleicons:user-asking" size={35} color={COLORS.blue} />
                     </View>
+
+                    <Link href="/notes">Hello</Link>
 
                 </ScrollView>
             </ImageBackground>

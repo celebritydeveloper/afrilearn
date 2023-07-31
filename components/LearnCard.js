@@ -1,13 +1,16 @@
-import { StyleSheet, View, Text, Image, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image, Pressable, TouchableOpacity } from "react-native";
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
 import global from "../styles/global";
 import { StarIcon } from "../assets/svgs";
+import { Link, useRouter } from "expo-router";
 
 
-export default function LearnCard({ title, text, icon }) {
+export default function LearnCard({ title, text, icon, link }) {
+    const router = useRouter();
+
     return (
-        <View style={[styles.card, global.rowSpaceAround,]}>
+        <Pressable style={[styles.card, global.rowSpaceAround,]} onPress={() => router.push(link)}>
             <View style={[styles.icon, global.rowCenter]}>
                 { icon }
             </View>
@@ -18,7 +21,7 @@ export default function LearnCard({ title, text, icon }) {
             </View>
 
             <Iconify icon="maki:arrow" size={26} color={COLORS.nutralColor} />
-        </View>
+        </Pressable>
         
     )
 }

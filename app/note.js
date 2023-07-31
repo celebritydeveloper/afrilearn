@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { useRouter } from "expo-router";
 import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableWithoutFeedback, Pressable } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
 import global from "../styles/global";
-import { AfriHappyIcon, AskAfriGreenIcon, CoinIcon, AfriCurrencyBlackIcon } from "../assets/svgs";
+import {  IndicatorBlackIcon, StarIcon, CoinIcon, AfriCurrencyBlackIcon, FlatCoinIcon } from "../assets/svgs";
 import { Asset } from "expo-asset";
 import LearnCard from "../components/LearnCard";
 import { Link } from "expo-router";
@@ -12,11 +13,15 @@ import QuestionCard from "../components/QuestionCard";
 import Animated from "react-native-reanimated";
 import QuizData from "../data/QuizData";
 import Timer from "../components/Timer";
+import BigButton from "../components/BigButton";
+import StatusBadge from "../components/StatusBadge";
+import NoteVideo from "../components/NoteVideo";
 
 
 
 export default function Note() {
     const examQuestions = QuizData.questions;
+    const router = useRouter();
     const [progress, setProgress] = useState(new Animated.Value(0));
     const [currentQuestionIndex, setCurrentQuestionIndex ] = useState(0);
     
@@ -40,12 +45,18 @@ export default function Note() {
     return (
         <SafeAreaProvider style={{ flex: 1}}>
             <View style={[global.rowSpaceBetween, styles.header ]}>
-                <View style={[{columnGap: 10}, global.row]}>
+                <TouchableWithoutFeedback style={[{columnGap: 10}, global.row]} onPress={() => router.back()}>
                     <Iconify icon="iconamoon:close-bold" size={35} color={COLORS.nutralColor} />
-                </View>
-                <View style={[global.rowCenter, { gap: 20 }]}>
-                    <Text style={styles.steps}>{ currentQuestionIndex + 1}/{ examQuestions.length }</Text>
-                    <Timer hours={2} minutes={30} seconds={0} />
+                </TouchableWithoutFeedback>
+                <View style={[global.row, {gap: 65 }]}>
+                    <View style={[global.row, { gap: 8 }]}>
+                        <Iconify icon="fluent:speaker-2-24-filled" size={25} color={COLORS.nutralColor} />
+                        <Text style={styles.steps}>Listen</Text>
+                    </View>
+                    <View style={[global.row, { gap: 8 }]}>
+                        <Iconify icon="akar-icons:video" size={27} color={COLORS.nutralColor} />
+                        <Text style={styles.steps}>Watch</Text>
+                    </View>
                 </View>
             </View>
             <View style={[styles.progressBar, global.columnAlignCenter]}>
@@ -54,47 +65,155 @@ export default function Note() {
                 </Animated.View>
             </View>
 
-            <ImageBackground source={{uri: Asset.fromModule(require("../assets/images/pattern.png")).uri}} resizeMode="repeat" style={{  flex: 1, width: "100%"}}>
 
-                <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingTop: 20, paddingBottom: 70, justifyContent: "space-between" }}>
+
+            <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingTop: 20, paddingBottom: 70, justifyContent: "space-between", backgroundColor: COLORS.white }}>
                      
                     <View style={{ marginBottom: 25 }}>
-                        <Text style={styles.questionTitle}>Question {currentQuestionIndex + 1}</Text>
-                        <Text style={styles.questionText}>{ examQuestions[currentQuestionIndex].question}</Text>
+                        <Text style={styles.title}>Living things and non-living things</Text>
+                        <View style={[global.row, { gap: 10 }]}>
+                            <Text style={styles.questionText}>2mins read</Text>
+                            <IndicatorBlackIcon />
+                            <Text style={styles.questionText}>23k views</Text>
+                        </View>
                     </View>
 
-                    <QuestionCard options={examQuestions[currentQuestionIndex].options} />
-
-
-                    <View style={[global.rowCenter, { gap: 6, paddingVertical: 40 }]}>
-                        <Text style={styles.friend}>Ask a friend</Text>
-                        <Iconify icon="humbleicons:user-asking" size={35} color={COLORS.blue} />
+                    <View style={styles.noteImageContainer}>
+                        <Image
+                            style={styles.noteImage}
+                            resizeMode="stretch"
+                            source={{ uri: Asset.fromModule(require("../assets/images/biology.png")).uri }}
+                        />
                     </View>
 
-                </ScrollView>
-            </ImageBackground>
+                    <ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false } style={{ marginBottom: 35 }}>
+                        <View style={[global.row, styles.action, { gap: 5 }]}>
+                            <Iconify icon="iconamoon:comment-bold" size={28} color={COLORS.dark} />
+                            <Text style={styles.actionText}>2.2k</Text>
+                        </View>
 
-            <View style={styles.topCard}>
-                <View style={[global.rowSpaceBetween, { marginBottom: 25 }]}>
-                    <Pressable onPress={handlePrev}
-                        style={[styles.arrow, global.rowCenter, { backgroundColor: currentQuestionIndex == 0 ? "#ECEEF5" : COLORS.white, borderColor: currentQuestionIndex == 0 ? "#B4B9CA" : COLORS.black, }]}>
-                        <Iconify icon="material-symbols:arrow-back-rounded" size={35} color={currentQuestionIndex == 0 ? "#B4B9CA" : COLORS.nutralColor} />
-                    </Pressable>
+                        <View style={[global.row, styles.action, { gap: 5 }]}>
+                            <Iconify icon="icon-park-outline:like" size={25} color={COLORS.dark} />
+                            <Text style={styles.actionText}>2k</Text>
+                        </View>
 
-                    <Iconify icon="material-symbols:page-info-rounded" size={35} color={COLORS.black} />
-                    <Iconify icon="fluent:speaker-2-24-regular" size={35} color={COLORS.black} />
-                    <Iconify icon="tabler:flag" size={35} color={COLORS.black} />
+                        <View style={[global.row, styles.action, { gap: 5 }]}>
+                            <Iconify icon="solar:play-linear" size={25} color={COLORS.dark} />
+                            <Text style={styles.actionText}>Watch</Text>
+                        </View>
 
-                    <Pressable onPress={handleNext}
-                        style={[styles.arrow, global.rowCenter, { backgroundColor: currentQuestionIndex + 1 == examQuestions.length ? "#ECEEF5" : COLORS.white, borderColor: currentQuestionIndex + 1 == examQuestions.length ? "#B4B9CA" : COLORS.black, }]}>
-                        <Iconify icon="material-symbols:arrow-forward-rounded" size={35} color={ currentQuestionIndex + 1 == examQuestions.length ? "#B4B9CA" : COLORS.nutralColor} />
-                    </Pressable>
-                </View>
+                        <View style={[global.row, styles.action, { gap: 5 }]}>
+                            <Iconify icon="octicon:download-16" size={28} color={COLORS.dark} />
+                        </View>
 
-                <View style={[styles.button, global.rowCenter]}>
-                    <Text style={styles.buttonText}>Submit</Text>
-                </View>
-            </View>
+                        <View style={[global.row, styles.action, { gap: 5 }]}>
+                            <Iconify icon="icon-park-outline:share-two" size={28} color={COLORS.dark} />
+                        </View>
+
+                        <View style={[global.row, styles.action, { gap: 5 }]}>
+                            <Iconify icon="icon-park-outline:share-two" size={28} color={COLORS.dark} />
+                        </View>
+                    </ScrollView>
+
+                    <View style={[styles.comment, global.columnAlignCenter]}>
+                        <View style={[global.row, { gap: 14, marginBottom: 10 }]}>
+                            <Text style={styles.commentTitle}>Comments</Text>
+                            <Text style={styles.commentNumber}>2.2k</Text>
+                        </View>
+                        <View style={[global.rowSpaceBetween, { gap: 10 }]}>
+                            <View style={[global.rowCenter, styles.profileImage]}>
+                                <Image
+                                    style={styles.tinyLogo}
+                                    source={{
+                                        uri: "https://images.unsplash.com/photo-1536337005238-94b997371b40?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHwxMnx8Ym95JTIwaW4lMjBjbGFzc3xlbnwwfHx8fDE2OTA2Nzg1OTl8MA&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450",
+                                    }}
+                                />
+                            </View>
+                            <Text numberOfLines={2} style={styles.commentText}>I want to ask a question. If you are going to the term non-living things to clasify a creature Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</Text>
+                            <Iconify icon="ph:caret-down-bold" size={22} color={COLORS.dark} />
+                        </View>
+                    </View>
+
+                    <View>
+                        <Text style={styles.noteText}>Living things have “life,” though some might not show its evident signs. For instance, a tree would probably not react the same way a human would. It would not react when we hit it, and it might not be able to walk around. Though the signs of life displayed by them are not very observable, it does not make them non-living.</Text>
+
+                        <Text style={styles.noteText}>Let us have a detailed look at the important characteristics of living and non-living things and the difference between the two.</Text>
+                        
+                        <Text style={styles.noteSubTitle}>Living things</Text>
+
+                        <Text style={styles.noteText}>Living things exist and are alive and are made of microscopic structures called cells. They grow and exhibit movement or locomotion. They experience metabolism, which includes anabolic and catabolic reactions.</Text>
+
+                        <Text style={styles.noteText}>Living things are capable of producing a new life which is of their own kind through the process of reproduction. Living things have a particular life span and are not immortal.</Text>
+
+                        <Text style={styles.noteText}>Let us have a detailed look at the important characteristics of living and non-living things and the difference between the two.</Text>
+                    </View>
+
+                    <View style={styles.lesson}>
+                        <View style={[global.row, { gap: 14, marginBottom: 3 }]}>
+                            <Iconify icon="healthicons:exercise-weights" size={28} color={COLORS.dark} />
+                            <Text style={styles.lessonTitle}>Lesson exercise</Text>
+                        </View>
+
+                        <Text style={styles.lessonText}>How well did you understand this topic? Complete the exercise below</Text>
+
+                        <View style={[styles.lessonCard, global.row,]}>
+                            <View style={[styles.star, global.rowCenter]}>
+                                <StarIcon />
+                            </View>
+                            <Text style={styles.text}>Living things and non-living things</Text>
+                        </View>
+
+                        <View>
+                            <Text style={styles.exercise}>Exercise stats:</Text>
+                            <View style={[global.row, { gap: 28 }]}>
+                                <View style={[global.row, { gap: 5 }]}>
+                                    <Iconify icon="ph:question-bold" size={28} color={COLORS.brandGreen} />
+                                    <Text style={styles.exerciseNumber}>10</Text>
+                                </View>
+
+                                <View style={[global.row, { gap: 5 }]}>
+                                    <Iconify icon="ph:hash-bold" size={28} color={COLORS.brandGreen} />
+                                    <Text style={styles.exerciseNumber}>20 Pt</Text>
+                                </View>
+
+                                <View style={[global.row, { gap: 5 }]}>
+                                    <FlatCoinIcon />
+                                    <View style={[global.row]}>
+                                        <AfriCurrencyBlackIcon />
+                                        <Text style={styles.exerciseNumber}>10</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+
+                    <View style={styles.noteVideoContainer}>
+                        <Text style={styles.sectionTitle}>Up next</Text>
+                        
+                        <NoteVideo text="started" status="started"
+                            video="https://images.unsplash.com/photo-1589149098258-3e9102cd63d3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHwzODB8fGFic3RyYWN0fGVufDB8fHx8MTY5MDcxOTEwOXww&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450" />
+
+                        <NoteVideo text="completed" status="completed"
+                            video="https://images.unsplash.com/photo-1552250575-e508473b090f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHwxODV8fGFic3RyYWN0fGVufDB8fHx8MTY5MDc5MzU0M3ww&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450" />
+
+                        <NoteVideo text="pending" status="pending"
+                            video="https://images.unsplash.com/photo-1509114397022-ed747cca3f65?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHw2NHx8YWJzdHJhY3R8ZW58MHx8fHwxNjkwNzE2NTMzfDA&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450" />
+
+                        <NoteVideo text="pending" status="pending"
+                            video="https://images.unsplash.com/photo-1589149098258-3e9102cd63d3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w0Mzc0NDd8MHwxfHNlYXJjaHwzODB8fGFic3RyYWN0fGVufDB8fHx8MTY5MDcxOTEwOXww&ixlib=rb-4.0.3&q=85&q=85&fmt=jpg&crop=entropy&cs=tinysrgb&w=450" />
+
+
+                    </View>
+
+                    <View style={[styles.buttonContainer]}>
+                        <Pressable style={[styles.button, global.rowCenter]}>
+                            <Text style={styles.buttonText}>Load more</Text>
+                        </Pressable>
+                    </View>
+
+
+
+            </ScrollView>
 
         </SafeAreaProvider>
         
@@ -111,8 +230,8 @@ const styles = StyleSheet.create({
     },
 
     header: {
-        borderBottomColor: COLORS.nutralColor,
-        paddingHorizontal: 20,
+        backgroundColor: "#ECEEF5",
+        paddingHorizontal: 15,
         paddingBottom: 8,
         paddingTop: 40
     },
@@ -134,10 +253,114 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
 
+    action: {
+        backgroundColor: COLORS.grayLite,
+        borderRadius: 20,
+        marginRight: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 5
+    },
+
+    actionText: {
+        color: COLORS.dark,
+        fontSize: 14,
+        fontFamily: "Andika_400Regular",
+    },
+
+    noteImageContainer: {
+        borderRadius: 17,
+        height: 196,
+        marginBottom: 25,
+        width: "100%",
+    },
+
+    noteImage: {
+        borderRadius: 17,
+        height: 196,
+        width: "100%",
+    },
+
+    tinyLogo: {
+        borderRadius: 17,
+        height: 40,
+        width: 40,
+    },
+
+    profileImage: {
+        borderWidth: 3,
+        borderRadius: 17,
+        height: 45,
+        width: 45,
+    },
+
     progressBar: {
         backgroundColor: COLORS.nutralColor,
         height: 12,
         width: "100%"
+    },
+
+    comment: {
+        backgroundColor: COLORS.grayLite,
+        borderRadius: 30,
+        height: 130,
+        marginBottom: 20,
+        paddingHorizontal: 15,
+        paddingVertical: 5
+    },
+
+    commentTitle: {
+        color: COLORS.black,
+        fontSize: 14,
+        fontFamily: "Andika_700Bold",
+    },
+
+    commentNumber: {
+        color: COLORS.black,
+        fontSize: 12,
+        fontFamily: "Andika_400Regular",
+    },
+
+    commentText: {
+        color: COLORS.dark,
+        fontSize: 12,
+        fontFamily: "Andika_400Regular",
+        maxWidth: 280
+    },
+
+    noteText: {
+        color: COLORS.nutralColor,
+        fontSize: 16,
+        fontFamily: "Andika_400Regular",
+        lineHeight: 26,
+        marginBottom: 30
+    },
+
+    noteSubTitle: {
+        color: COLORS.dark,
+        fontSize: 20,
+        fontFamily: "Andika_700Bold",
+        marginBottom: 18
+    },
+
+    lesson: {
+        backgroundColor: COLORS.grayLite,
+        borderRadius: 30,
+        marginBottom: 35,
+        paddingHorizontal: 15,
+        paddingVertical: 20
+    },
+
+    lessonTitle: {
+        color: COLORS.black,
+        fontSize: 17,
+        fontFamily: "Andika_700Bold",
+    },
+
+    lessonText: {
+        color: COLORS.dark,
+        fontSize: 14,
+        fontFamily: "Andika_400Regular",
+        lineHeight: 22,
     },
 
     progress: {
@@ -146,10 +369,16 @@ const styles = StyleSheet.create({
         height: 7
     },
 
-    questionTitle: {
+    title: {
         color: COLORS.dark,
-        fontSize: 17,
+        fontSize: 20,
         fontFamily: "Andika_700Bold",
+    },
+
+    time: {
+        color: COLORS.dark,
+        fontSize: 13,
+        fontFamily: "Andika_400Regular",
     },
 
     questionText: {
@@ -191,25 +420,80 @@ const styles = StyleSheet.create({
         width: 50
     },
 
+    buttonContainer: {
+        marginHorizontal: 45
+    },
+
+
+    buttonText: {
+        color: COLORS.black,
+        fontSize: 17,
+        fontFamily: "Andika_700Bold",
+    },
+
+
+    lessonCard: {
+        height: 120,
+        backgroundColor: COLORS.brandGreen,
+        borderRadius: 30,
+        borderLeftWidth: 6,
+        borderBottomWidth: 6,
+        borderRightWidth: 3,
+        borderTopWidth: 3,
+        borderColor: COLORS.black,
+        gap: 23,
+        marginVertical: 18,
+        paddingHorizontal: 18,
+        width: "100%",
+    },
+
+    text: {
+        color: COLORS.white,
+        fontSize: 17,
+        fontFamily: "Andika_700Bold",
+        width: 200
+    },
+
+    exercise: {
+        color: COLORS.black,
+        fontSize: 14,
+        fontFamily: "Andika_700Bold",
+        marginBottom: 5
+    },
+
+    exerciseNumber: {
+        color: COLORS.black,
+        fontSize: 14,
+        fontFamily: "Andika_700Bold"
+    },
 
     button: {
-        height: 65,
+        height: 68,
         backgroundColor: COLORS.white,
-        borderRadius: 30,
-        borderLeftWidth: 5,
-        borderBottomWidth: 5,
+        borderRadius: 22,
+        borderLeftWidth: 6,
+        borderBottomWidth: 6,
         borderRightWidth: 2,
         borderTopWidth: 2,
         borderColor: COLORS.black,
         width: "100%",
     },
 
-    buttonText: {
-        color: COLORS.black,
-        fontSize: 19,
-        fontFamily: "Andika_700Bold",
+    star: {
+        backgroundColor: "#FBEFE1",
+        borderRadius: 100,
+        height: 95,
+        width: 95
     },
 
+    sectionTitle: {
+        color: COLORS.black,
+        fontSize: 18,
+        fontFamily: "Andika_700Bold",
+        marginBottom: 18
+    },
 
-    
+    noteVideoContainer: {
+        marginBottom: 40,
+    },
 })

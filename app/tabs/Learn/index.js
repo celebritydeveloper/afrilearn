@@ -6,12 +6,12 @@ import global from "../../../styles/global";
 import { AfriHappyIcon, AskAfriGreenIcon, CoinIcon, AfriCurrencyBlackIcon } from "../../../assets/svgs";
 import { Asset } from "expo-asset";
 import LearnCard from "../../../components/LearnCard";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 
 
 export default function Learn() {
-
+    const router = useRouter();
     return (
         <SafeAreaProvider style={{ flex: 1}}>
             <View style={[global.rowSpaceBetween, styles.header ]}>
@@ -46,17 +46,17 @@ export default function Learn() {
 
                     <LearnCard title="Past questions" text="Demolish WAEC, UME, exam past questions and win exciting prizes" 
                         icon={<Iconify icon="ph:exam-fill" size={35} color={COLORS.brandGreen} />}
-                        link="../../index"
+                        link="/questions"
                     />
 
                     <LearnCard title="Watch video lessons" text="Learn subjects, topics, and concepts by watching video classes"
                         icon={<Iconify icon="solar:play-bold" size={35} color={COLORS.brandGreen} />}
-                        link="../../index"
+                        link="/questions"
                     />
 
                     <LearnCard title="Read class notes" text="Learn subjects, topics, and concepts by reading class notes"
                         icon={<Iconify icon="majesticons:note-text" size={35} color={COLORS.brandGreen} />}
-                        link="../../index"
+                        link="/note"
                     />
 
                 </ScrollView>
