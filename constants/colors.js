@@ -6,7 +6,7 @@ export default {
     grayLite: "#F6F6F6",
     lighterGray: "#707070",
     lightRed: "lightred",
-    darkRed: "darkred",
+    darkRed: "#DF4E4E",
     background: "#F9F9FF",
     darkGray: "#9B9B9B",
     green: "#1CAE81",

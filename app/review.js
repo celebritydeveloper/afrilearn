@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableWithoutFeedback, Pressable, Switch } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, ImageBackground, 
+    TouchableWithoutFeedback, Pressable, Switch } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
 import global from "../styles/global";
-import { AfriSadIcon, } from "../assets/svgs";
+import { AfriSadIcon, AfriDancingIcon } from "../assets/svgs";
 import { Asset } from "expo-asset";
-import LearnCard from "../components/LearnCard";
 import { Link, useRouter } from "expo-router";
 import QuestionCard from "../components/ReviewQuestionCard";
 import Animated, { interpolate, useSharedValue } from "react-native-reanimated";
 import QuizData from "../data/exam";
 import Timer from "../components/Timer";
 import * as Progress from 'react-native-progress';
+const answers = ["Ribosome", "Monera", "Plantae"]
 
 
 
@@ -63,7 +64,7 @@ export default function ReviewExam() {
                         <Text style={styles.questionText}>{ examQuestions[currentQuestionIndex].question}</Text>
                     </View>
 
-                    <View style={styles.explanation}>
+                    <View style={[styles.explanation, { display: examQuestions[currentQuestionIndex].answer !== answers[currentQuestionIndex] ? "flex" : "none" }]}>
                         <View style={[global.rowSpaceBetween, { marginBottom: 18}]}>
                             <Text style={styles.explanationTitle}>Explanation</Text>
                             <View style={[global.rowCenter, {gap: 5 }]}>
@@ -80,7 +81,7 @@ export default function ReviewExam() {
                         <Text style={styles.explanationText}>The study of animals. Other branches include Anatomy (the study of the structure of organisms)</Text>
                     </View>
 
-                    <QuestionCard options={examQuestions[currentQuestionIndex].options} />
+                    <QuestionCard questions={examQuestions[currentQuestionIndex]} answer={answers[currentQuestionIndex]} />
 
                 </ScrollView>
             </ImageBackground>
@@ -103,13 +104,20 @@ export default function ReviewExam() {
                 </View>
 
                 <View style={[global.rowSpaceBetween]}>
-                    <View style={[global.row, { gap: 7 }]}>
+                    { examQuestions[currentQuestionIndex].answer === answers[currentQuestionIndex] ?
+                        <View style={[global.row, { gap: 7 }]}>
+                            <AfriDancingIcon />
+                            <Text style={styles.answer}>Correct!</Text>
+                        </View>
+                        :
+                        <View style={[global.row, { gap: 7 }]}>
                         <AfriSadIcon />
                         <Text style={styles.answer}>Incorrect!</Text>
                     </View>
-                    <View style={[styles.button, global.rowCenter]}>
+                    }
+                    <TouchableOpacity style={[styles.button, global.rowCenter]} onPress={() => router.push("/score")}>
                         <Text style={styles.buttonText}>Done</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -145,6 +153,12 @@ const styles = StyleSheet.create({
     },
 
     answer: {
+        color: COLORS.brandGreen,
+        fontSize: 17,
+        fontFamily: "Andika_700Bold",
+    },
+
+    incorrect: {
         color: "#DF4E4E",
         fontSize: 17,
         fontFamily: "Andika_700Bold",

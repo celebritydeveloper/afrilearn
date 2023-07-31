@@ -51,7 +51,7 @@ export default quizs = {
                     option: "Plantae"
                 }
             ],
-            answer: "Ribosome",
+            answer: "Plantae",
             explanation: "The study of animals. Other branches include Anatomy (the study of the structure of organisms)"
         },
     
@@ -75,7 +75,7 @@ export default quizs = {
                     option: "Plantae"
                 }
             ],
-            answer: "Ribosome",
+            answer: "Plantae",
             explanation: "The study of animals. Other branches include Anatomy (the study of the structure of organisms)"
         }
     ]

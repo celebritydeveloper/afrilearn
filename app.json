@@ -1,6 +1,16 @@
 {
   "expo": {
     "scheme": "acme",
-    "web": { "bundler": "metro" }
+    "web": {
+      "bundler": "metro"
+    },
+    "android": {
+      "package": "com.afrilearn.example"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6e9541d7-4c7f-4523-8710-a00d917aae38"
+      }
+    }
   }
 }

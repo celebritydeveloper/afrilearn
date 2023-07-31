@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, Badge } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../../constants";
@@ -11,6 +11,7 @@ import { Asset } from "expo-asset";
 import PerformanceCard from "../../components/PerformanceCard";
 import LessonVideo from "../../components/LessonVideo";
 import TopicCard from "../../components/TopicCard";
+import IconBadge from 'react-native-icon-badge';
 
 
 
@@ -98,7 +99,7 @@ export default function Home() {
 
                     <InviteFriend />
 
-                    <View style={styles.performanceContainer}>
+                    {/* <View style={styles.performanceContainer}>
                         <View style={[global.rowSpaceBetween, styles.leaderHeader]}>
                             <Text style={styles.leaderTitleLeft}>My overall average</Text>
                             <View style={[global.row, { gap: 8}]}>
@@ -110,7 +111,7 @@ export default function Home() {
                         <ScrollView horizontal={ true } showsHorizontalScrollIndicator={ false }>
                             <PerformanceCard />
                         </ScrollView>
-                    </View>
+                    </View> */}
 
 
                     <View>

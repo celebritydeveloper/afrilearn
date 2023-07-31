@@ -5,7 +5,8 @@ import { Iconify } from 'react-native-iconify';
 import { COLORS } from '../constants';
 import { IndicatorIcon } from '../assets/svgs';
 import global from '../styles/global';
-import ProgressBar from "react-native-progress/Bar"
+import ProgressBar from "react-native-progress/Bar";
+
 
 export default function LessonVideo({ subject, topic }) {
   const player = useRef();
@@ -42,24 +43,23 @@ export default function LessonVideo({ subject, topic }) {
 
   return (
     <View style={{ marginRight: 15, flex: 1, width: 160 }}>
-      {/* <View style={styles.container}>
-        <Video
+      <View style={styles.container}>
+        {/* <Video
           ref={player}
           paused={paused}
           onLoad={handleLoad}
           onProgress={handleProgress}
           onTouchEnd={handleEnd}
           style={styles.video}
-          resizeMode="cover"
           
           source={{
             uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
           }}
-        />
+        /> */}
         
-        <Pressable style={styles.buttons} onPress={handleMainButtonTouch}>
+        {/* <Pressable style={styles.buttons} onPress={handleMainButtonTouch}>
           { paused ? <Iconify icon="solar:pause-bold" size={36} color={COLORS.dark} /> : <Iconify icon="solar:play-bold" size={36} color={COLORS.dark} />}
-        </Pressable>
+        </Pressable> */}
 
 
         <TouchableWithoutFeedback style={styles.control} onPress={handleProgressTouch}>
@@ -87,7 +87,7 @@ export default function LessonVideo({ subject, topic }) {
         <Text style={styles.indicatorText}>Started</Text>
       </View>
 
-      <Text style={styles.views}>62k views</Text> */}
+      <Text style={styles.views}>62k views</Text>
     </View>
   );
 }
