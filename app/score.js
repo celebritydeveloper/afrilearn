@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableWithoutFeedback, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
@@ -9,7 +9,7 @@ import { Asset } from "expo-asset";
 import LearnCard from "../components/LearnCard";
 import { Link, useRouter } from "expo-router";
 import QuestionCard from "../components/QuestionCard";
-import QuizData from "../data/QuizData";
+import QuizData from "../data/exam";
 import Timer from "../components/Timer";
 
 
@@ -119,25 +119,25 @@ export default function Score() {
 
             <View style={styles.bottomCard}>
                 <View style={[global.rowSpaceBetween]}>
-                    <View style={[global.columnCenter]}>
+                    <TouchableOpacity style={[global.columnCenter]} onPress={() => router.push("/review")}>
                         <Iconify icon="ic:round-manage-search" size={35} />
                         <Text style={styles.bottomCardText}>Review</Text>
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style={[global.columnCenter]}>
+                    <TouchableOpacity style={[global.columnCenter]}>
                         <Iconify icon="material-symbols:refresh-rounded" size={35} />
                         <Text style={styles.bottomCardText}>Retake</Text>
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style={[global.columnCenter]}>
+                    <TouchableOpacity style={[global.columnCenter]}>
                         <Iconify icon="majesticons:share-line" size={35} />
                         <Text style={styles.bottomCardText}>Share</Text>
-                    </View>
+                    </TouchableOpacity>
 
-                    <View style={[global.columnCenter]}>
+                    <TouchableOpacity style={[global.columnCenter]}>
                         <Iconify icon="fluent:data-bar-vertical-16-regular" size={35} />
                         <Text style={styles.bottomCardText}>Report</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
 
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
     },
 
     bottomCardText: {
-        hcolor: COLORS.black,
+        color: COLORS.black,
         fontSize: 14,
         fontFamily: "Andika_700Bold",
     },

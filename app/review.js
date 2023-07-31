@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableWithoutFeedback, TouchableOpacity, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableWithoutFeedback, Pressable, Switch } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
 import global from "../styles/global";
-import { AfriHappyIcon, AskAfriGreenIcon, CoinIcon, AfriCurrencyBlackIcon } from "../assets/svgs";
+import { AfriSadIcon, } from "../assets/svgs";
 import { Asset } from "expo-asset";
 import LearnCard from "../components/LearnCard";
 import { Link, useRouter } from "expo-router";
-import QuestionCard from "../components/QuestionCard";
+import QuestionCard from "../components/ReviewQuestionCard";
 import Animated, { interpolate, useSharedValue } from "react-native-reanimated";
 import QuizData from "../data/exam";
 import Timer from "../components/Timer";
@@ -16,12 +16,14 @@ import * as Progress from 'react-native-progress';
 
 
 
-export default function Questions() {
+export default function ReviewExam() {
     const examQuestions = QuizData.questions;
     const router = useRouter();
     const [progress, setProgress] = useState(0);
     // const progress = useSharedValue(0);
     const [currentQuestionIndex, setCurrentQuestionIndex ] = useState(0);
+    const [isEnabled, setIsEnabled] = useState(false);
+    const toggleSwitch = () => setIsEnabled(previousState => !previousState);
     
 
     // const progressAnimation = interpolate(progress, [0, examQuestions.length], ["0%", "100%"]);
@@ -45,10 +47,7 @@ export default function Questions() {
                 <TouchableWithoutFeedback style={[{columnGap: 10}, global.row]} onPress={() => router.back()}>
                     <Iconify icon="iconamoon:close-bold" size={35} color={COLORS.nutralColor} />
                 </TouchableWithoutFeedback>
-                <View style={[global.rowCenter, { gap: 20 }]}>
-                    <Text style={styles.steps}>{ currentQuestionIndex + 1}/{ examQuestions.length }</Text>
-                    <Timer hours={2} minutes={30} seconds={0} />
-                </View>
+                <Text style={styles.steps}>{ currentQuestionIndex + 1}/{ examQuestions.length }</Text>
             </View>
 
             <Progress.Bar progress={progress} 
@@ -57,25 +56,36 @@ export default function Questions() {
 
             <ImageBackground source={{uri: Asset.fromModule(require("../assets/images/pattern.png")).uri}} resizeMode="repeat" style={{  flex: 1, width: "100%"}}>
 
-                <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingTop: 20, paddingBottom: 70, justifyContent: "space-between" }}>
+                <ScrollView contentContainerStyle={{  paddingHorizontal: 12, paddingTop: 10, paddingBottom: 180 }}>
                      
                     <View style={{ marginBottom: 25 }}>
                         <Text style={styles.questionTitle}>Question {currentQuestionIndex + 1}</Text>
                         <Text style={styles.questionText}>{ examQuestions[currentQuestionIndex].question}</Text>
                     </View>
 
-                    <QuestionCard options={examQuestions[currentQuestionIndex].options} />
-
-
-                    <View style={[global.rowCenter, { gap: 6, paddingVertical: 40 }]}>
-                        <Text style={styles.friend}>Ask a friend</Text>
-                        <Iconify icon="humbleicons:user-asking" size={35} color={COLORS.blue} />
+                    <View style={styles.explanation}>
+                        <View style={[global.rowSpaceBetween, { marginBottom: 18}]}>
+                            <Text style={styles.explanationTitle}>Explanation</Text>
+                            <View style={[global.rowCenter, {gap: 5 }]}>
+                                <Text style={styles.more}>More</Text>
+                                <Switch
+                                    trackColor={{ false: "#B4B9CA", true: "#B4B9CA" }}
+                                    thumbColor={isEnabled ? "white" : COLORS.white}
+                                    ios_backgroundColor={ COLORS.background }
+                                    onValueChange={toggleSwitch}
+                                    value={isEnabled}
+                                />
+                            </View>
+                        </View>
+                        <Text style={styles.explanationText}>The study of animals. Other branches include Anatomy (the study of the structure of organisms)</Text>
                     </View>
+
+                    <QuestionCard options={examQuestions[currentQuestionIndex].options} />
 
                 </ScrollView>
             </ImageBackground>
 
-            <View style={styles.topCard}>
+            <View style={styles.bottomCard}>
                 <View style={[global.rowSpaceBetween, { marginBottom: 25 }]}>
                     <Pressable onPress={handlePrev}
                         style={[styles.arrow, global.rowCenter, { backgroundColor: currentQuestionIndex == 0 ? "#ECEEF5" : COLORS.white, borderColor: currentQuestionIndex == 0 ? "#B4B9CA" : COLORS.black, }]}>
@@ -92,9 +102,15 @@ export default function Questions() {
                     </Pressable>
                 </View>
 
-                <TouchableOpacity style={[styles.button, global.rowCenter]} onPress={() => router.push("/score")}>
-                    <Text style={styles.buttonText}>Submit</Text>
-                </TouchableOpacity>
+                <View style={[global.rowSpaceBetween]}>
+                    <View style={[global.row, { gap: 7 }]}>
+                        <AfriSadIcon />
+                        <Text style={styles.answer}>Incorrect!</Text>
+                    </View>
+                    <View style={[styles.button, global.rowCenter]}>
+                        <Text style={styles.buttonText}>Done</Text>
+                    </View>
+                </View>
             </View>
 
         </SafeAreaProvider>
@@ -123,16 +139,15 @@ const styles = StyleSheet.create({
         fontFamily: "Andika_700Bold",
     },
 
-    timeText: {
-        color: COLORS.white,
-        fontSize: 12,
-        fontFamily: "Andika_700Bold",
+    more: {
+        fontSize: 18,
+        fontFamily: "Andika_400Regular",
     },
 
-    time: {
-        backgroundColor: COLORS.dark,
-        borderRadius: 15,
-        paddingHorizontal: 10
+    answer: {
+        color: "#DF4E4E",
+        fontSize: 17,
+        fontFamily: "Andika_700Bold",
     },
 
     progressBar: {
@@ -157,15 +172,32 @@ const styles = StyleSheet.create({
         color: COLORS.dark,
         fontSize: 16,
         fontFamily: "Andika_400Regular",
+        
     },
 
-    friend: {
-        color: COLORS.blue,
-        fontSize: 17,
+    explanation: {
+        backgroundColor: "#E7F4EA",
+        borderRadius: 20,
+        borderWidth: 2,
+        marginBottom: 30,
+        paddingHorizontal: 15,
+        paddingVertical: 10
+    },
+
+    explanationTitle: {
+        color: COLORS.dark,
+        fontSize: 18,
         fontFamily: "Andika_700Bold",
     },
 
-    topCard: {
+    explanationText: {
+        color: COLORS.dark,
+        fontSize: 17,
+        fontFamily: "Andika_400Regular",
+        lineHeight: 23
+    },
+
+    bottomCard: {
         height: 170,
         backgroundColor: COLORS.gray,
         borderTopWidth: 2,
@@ -194,7 +226,7 @@ const styles = StyleSheet.create({
 
 
     button: {
-        height: 65,
+        height: 60,
         backgroundColor: COLORS.white,
         borderRadius: 30,
         borderLeftWidth: 5,
@@ -202,7 +234,7 @@ const styles = StyleSheet.create({
         borderRightWidth: 2,
         borderTopWidth: 2,
         borderColor: COLORS.black,
-        width: "100%",
+        width: 160,
     },
 
     buttonText: {

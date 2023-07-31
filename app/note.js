@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
-import { StyleSheet, View, Text, Image, ScrollView, ImageBackground, TouchableWithoutFeedback, Pressable } from "react-native";
+import { StyleSheet, View, Text, Image, ScrollView, FlatList, TouchableWithoutFeedback, Pressable } from "react-native";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
@@ -11,7 +11,7 @@ import LearnCard from "../components/LearnCard";
 import { Link } from "expo-router";
 import QuestionCard from "../components/QuestionCard";
 import Animated from "react-native-reanimated";
-import QuizData from "../data/QuizData";
+import QuizData from "../data/exam";
 import Timer from "../components/Timer";
 import BigButton from "../components/BigButton";
 import StatusBadge from "../components/StatusBadge";
@@ -135,6 +135,22 @@ export default function Note() {
                     </View>
 
                     <View>
+                        <Text style={styles.noteText}>We can find many things around us, from mountains and oceans to plants and animals. The earth in which we live is made up of several things. These “things” can be categorized into two different types – Living and Non-living Things.</Text>
+                        
+                        <FlatList
+                            data={[
+                                { key: "All living things breathe, eat, grow, move, reproduce and have senses." },
+                                { key: "Non-living things do not eat, grow, breathe, move and reproduce. They do not have senses." },
+                            ]}
+                            renderItem={({ item }) => {
+                                return (
+                                <View style={{ marginBottom: 1, padding: 0, paddingHorizontal: 8 }}>
+                                    <Text style={styles.noteText}>{`\u2022 ${item.key}`}</Text>
+                                </View>
+                                );
+                            }}
+                        />
+
                         <Text style={styles.noteText}>Living things have “life,” though some might not show its evident signs. For instance, a tree would probably not react the same way a human would. It would not react when we hit it, and it might not be able to walk around. Though the signs of life displayed by them are not very observable, it does not make them non-living.</Text>
 
                         <Text style={styles.noteText}>Let us have a detailed look at the important characteristics of living and non-living things and the difference between the two.</Text>

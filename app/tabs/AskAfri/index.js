@@ -1,4 +1,4 @@
-import { Text, View, SafeAreaView, StatusBar, ImageBackground, Image, FlatList, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Pressable } from "react-native";
+import { Text, View, SafeAreaView, StatusBar, ImageBackground, Image, FlatList, StyleSheet, KeyboardAvoidingView, TouchableWithoutFeedback, Pressable, Keyboard } from "react-native";
 
 //import { Message, ChatInputBox } from "../components";
 import Message from "../../../components/Message";
@@ -34,7 +34,7 @@ export default function AskAfri ({  }) {
         </View>
         
         <KeyboardAvoidingView style={ styles.bg } keyboardVerticalOffset={50}>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                 <ImageBackground source={{uri: Asset.fromModule(require("../../../assets/images/pattern.png")).uri}} resizeMode="repeat" style={{  flex: 1, width: "100%"}}>
                     <ScrollView contentContainerStyle={{ paddingHorizontal: 12, paddingTop: 20, paddingBottom: 150, backgroundColor: "rgba(255, 182, 193, 0.1)" }}>
                         

@@ -1,15 +1,13 @@
 import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
-// import dayjs from "dayjs";
-// import relativeTime from "dayjs/plugin/relativeTime";
-// dayjs.extend(relativeTime);
-// import { Auth, JS, Storage } from "aws-amplify";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 import { useEffect, useState } from "react";
 import { COLORS } from "../constants";
 import global from "../styles/global";
 import { AskAfriGreenIcon } from "../assets/svgs";
-// import ImageAttachments from "./ImageAttachments";
-// import VideoAttachments from "./VideoAttachments";
-// import moment from "moment";
+import UserPicture from "./UserPicture";
+import moment from "moment";
 
 export default function Message ({ message }) {
   const [isMe, setIsMe] = useState(false);
@@ -19,7 +17,6 @@ export default function Message ({ message }) {
 
   useEffect(() => {
     const isMyMessage = () => {
-      //const authUser = await Auth.currentAuthenticatedUser();
 
       setIsMe(message.user.name === "Ire");
     };
@@ -27,32 +24,6 @@ export default function Message ({ message }) {
     isMyMessage();
   }, []);
 
-//   useEffect(() => {
-//     const downloadAttachments = async () => {
-//       if (message.Attachments.items) {
-//         const downloadedAttachments = await Promise.all(
-//           message.Attachments.items.map((attachment) =>
-//             Storage.get(attachment.storageKey).then((uri) => ({
-//               ...attachment,
-//               uri,
-//             }))
-//           )
-//         );
-
-//         setDownloadedAttachments(downloadedAttachments);
-//       }
-//     };
-//     downloadAttachments();
-//   }, [JSON.stringify(message.Attachments.items)]);
-
-//   const imageContainerWidth = width * 0.8 - 30;
-
-//   const imageAttachments = downloadAttachments.filter(
-//     (at) => at.type === "IMAGE"
-//   );
-//   const videoAttachments = downloadAttachments.filter(
-//     (at) => at.type === "VIDEO"
-//   );
 
   return (
     <View style={ [styles.container, isMe ? global.rowAlignStart : global.rowReverse, { alignSelf: isMe ? "flex-end" : "flex-start",}]}>
@@ -74,9 +45,9 @@ export default function Message ({ message }) {
           </View>
         )}
         <Text>{ message.text }</Text>
-        {/* <Text style={styles.time}>{moment(message.createdAt).toObject().hours}:{moment(message.createdAt).toObject().minutes}</Text> */}
+        <Text style={styles.time}>{moment(message.createdAt).format("LT")}</Text>
       </View>
-      { isMe ? <Text>Me</Text> : <AskAfriGreenIcon /> }
+      { isMe ? <UserPicture /> : <AskAfriGreenIcon /> }
     </View>
   );
 };
