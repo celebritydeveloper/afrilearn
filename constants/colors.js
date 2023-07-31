@@ -1,6 +1,6 @@
 export default {
     white: "#fff",
-    black: "#333333",
+    black: "#000000",
     gray: "#ECEEF5",
     lightGray: "#F9F9FF",
     lighterGray: "#707070",
@@ -28,6 +28,7 @@ export default {
     nutralColor: "#41424F",
     afriGreen: "#45CD81",
     brandGreen: "#289B41",
+    lightGreen: "#B2FFD5",
     dark: "#191C2D",
     brown: "#FFDDB5",
     darkBrown: "#9B4128",

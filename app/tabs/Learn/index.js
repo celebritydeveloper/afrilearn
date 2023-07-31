@@ -6,6 +6,7 @@ import global from "../../../styles/global";
 import { AfriHappyIcon, AskAfriGreenIcon, CoinIcon, AfriCurrencyBlackIcon } from "../../../assets/svgs";
 import { Asset } from "expo-asset";
 import LearnCard from "../../../components/LearnCard";
+import { Link } from "expo-router";
 
 
 
@@ -24,7 +25,7 @@ export default function Learn() {
                     <CoinIcon />
                     <View style={[global.rowCenter, { gap: 2 }]}>
                         <AfriCurrencyBlackIcon />
-                        <Text style={styles.coin}>0.16</Text>
+                        <Link href="/questions" style={styles.coin}>0.16</Link>
                     </View>
                 </View>
             </View>
@@ -35,22 +36,27 @@ export default function Learn() {
                      
                     <LearnCard title="Master a subject" text="Master topics in any subject and win exciting prizes"
                         icon={<Iconify icon="mdi:star-circle" size={40} color={COLORS.brandGreen} />}
+                        link="../../index"
                     />
 
                     <LearnCard title="AskAfri" text="Get 24/7 homework help, writing assignments, and upcoming tests"
                         icon={<AskAfriGreenIcon />}
+                        link="../../index"
                     />
 
                     <LearnCard title="Past questions" text="Demolish WAEC, UME, exam past questions and win exciting prizes" 
                         icon={<Iconify icon="ph:exam-fill" size={35} color={COLORS.brandGreen} />}
+                        link="../../index"
                     />
 
                     <LearnCard title="Watch video lessons" text="Learn subjects, topics, and concepts by watching video classes"
                         icon={<Iconify icon="solar:play-bold" size={35} color={COLORS.brandGreen} />}
+                        link="../../index"
                     />
 
                     <LearnCard title="Read class notes" text="Learn subjects, topics, and concepts by reading class notes"
                         icon={<Iconify icon="majesticons:note-text" size={35} color={COLORS.brandGreen} />}
+                        link="../../index"
                     />
 
                 </ScrollView>
