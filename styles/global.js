@@ -66,6 +66,14 @@ const global = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
     },
+    rowReverse: {
+        alignItems: "flex-start",
+        flexDirection: "row-reverse",
+    },
+    rowAlignStart: {
+        alignItems: "flex-start",
+        flexDirection: "row",
+    },
     header: {
         marginBottom: 15,
     },

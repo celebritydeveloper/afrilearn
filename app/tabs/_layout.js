@@ -2,7 +2,7 @@ import * as React from "react"
 import { Tabs } from "expo-router";
 import { Iconify } from 'react-native-iconify';
 import { ROUTES, COLORS } from "../../constants";
-import { AskAfriIcon, AskAfriIconActive } from "../../assets/svgs";
+import { AskAfriIcon, AskAfriBigGreenIcon } from "../../assets/svgs";
 
 export default () => {
     return (
@@ -37,7 +37,7 @@ export default () => {
                 options={{
                     title: "AskAfri",
                     tabBarLabelStyle: { fontSize: 14, fontWeight: "bold", color: COLORS.nutralColor },
-                    tabBarIcon: ({ color, focused }) => ( focused ? <AskAfriIconActive /> : <AskAfriIcon />),
+                    tabBarIcon: ({ color, focused }) => ( focused ? <AskAfriBigGreenIcon /> : <AskAfriIcon />),
                     tabBarActiveTintColor: COLORS.black, tabBarShowLabel: true, tabBarLabel: "AskAfri",
                 }}
             />

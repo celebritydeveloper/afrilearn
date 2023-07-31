@@ -6,6 +6,7 @@ import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import { useEffect, useState } from "react";
 import { COLORS } from "../constants";
 import global from "../styles/global";
+import { AskAfriGreenIcon } from "../assets/svgs";
 // import ImageAttachments from "./ImageAttachments";
 // import VideoAttachments from "./VideoAttachments";
 // import moment from "moment";
@@ -20,7 +21,7 @@ export default function Message ({ message }) {
     const isMyMessage = () => {
       //const authUser = await Auth.currentAuthenticatedUser();
 
-      setIsMe(message.user.name === "Lukas");
+      setIsMe(message.user.name === "Ire");
     };
 
     isMyMessage();
@@ -54,12 +55,11 @@ export default function Message ({ message }) {
 //   );
 
   return (
-    <View style={[global.row]}>
+    <View style={ [styles.container, isMe ? global.rowAlignStart : global.rowReverse, { alignSelf: isMe ? "flex-end" : "flex-start",}]}>
       <View
         style={[ isMe ? styles.bubbleMe : styles.bubble,
           {
-            backgroundColor: isMe ? "#DCF8C5" : "white",
-            alignSelf: isMe ? "flex-start" : "flex-end",
+            backgroundColor: isMe ? COLORS.lightGreen : COLORS.white,
           },
         ]}
       >
@@ -76,14 +76,15 @@ export default function Message ({ message }) {
         <Text>{ message.text }</Text>
         {/* <Text style={styles.time}>{moment(message.createdAt).toObject().hours}:{moment(message.createdAt).toObject().minutes}</Text> */}
       </View>
-      { isMe ? <Text>Me</Text> : <Text>You</Text> }
+      { isMe ? <Text>Me</Text> : <AskAfriGreenIcon /> }
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   bubble: {
-    margin: 5,
+    marginLeft: 7,
+    marginBottom: 13,
     padding: 10,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 35,
@@ -95,11 +96,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 5,
     borderRightWidth: 2,
     borderTopWidth: 2,
-    borderColor: COLORS.black,
+    borderColor: COLORS.nutralColor,
   },
 
   bubbleMe: {
-    margin: 5,
+    marginRight: 7,
+    marginBottom: 13,
     padding: 10,
     borderTopLeftRadius: 35,
     borderTopRightRadius: 10,
@@ -111,7 +113,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 5,
     borderRightWidth: 2,
     borderTopWidth: 2,
-    borderColor: COLORS.black,
+    borderColor: COLORS.nutralColor,
+  },
+
+  container: {
+    paddingHorizontal: 10
   },
 
 
