@@ -1,28 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { StyleSheet, View, Text, Image, Pressable, Dimensions } from "react-native";
 import { Iconify } from 'react-native-iconify';
 import { COLORS } from "../constants";
 import global from "../styles/global";
 import { LeaderBadgeIcon, ChartIcon, CircleIcon, AfriCurrencyColorIcon } from "../assets/svgs";
-const {width, height} = Dimensions.get('screen');
 import Svg, { G, Path, Mask, Defs, ClipPath, Rect, Circle, } from "react-native-svg";
 const Circle_Length = 100;
 const Radius = Circle_Length / (2 * Math.PI);
 import Animated, {
-    useAnimatedProps,
-    withSpring,
-    useAnimatedStyle,
     useSharedValue,
-    withDelay,
     withTiming,
-  } from "react-native-reanimated";
+    useAnimatedProps,
+    useDerivedValue,
+  } from 'react-native-reanimated';
+
+  const BACKGROUND_COLOR = '#444B6F';
+const BACKGROUND_STROKE_COLOR = '#303858';
+const STROKE_COLOR = '#A6E1FA';
+
+const { width, height } = Dimensions.get('window');
+
+const CIRCLE_LENGTH = 1000; // 2PI*R
+const R = CIRCLE_LENGTH / (2 * Math.PI);
+
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 import * as Progress from 'react-native-progress';
 
 
 export default function PerformanceCard() {
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(0.8);
     const [indeterminate, setIndeterminate] = useState(true);
+
+    
 
 
     function animate() {
@@ -54,7 +64,7 @@ export default function PerformanceCard() {
                     </View>
                 </View>
             </View> */}
-            <Progress.Circle size={30} indeterminate={indeterminate} progress={progress}  />
+            <Progress.Circle size={70} progress={progress} showsText={true} thickness={10} strokeCap="round" />
         </View>
         
     )

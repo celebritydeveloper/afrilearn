@@ -12,24 +12,27 @@ import QuestionCard from "../components/QuestionCard";
 import Animated, { interpolate, useSharedValue } from "react-native-reanimated";
 import QuizData from "../data/QuizData";
 import Timer from "../components/Timer";
+import * as Progress from 'react-native-progress';
 
 
 
 export default function Questions() {
     const examQuestions = QuizData.questions;
     const router = useRouter();
-    //const [progress, setProgress] = useState(new Animated.Value(0));
-    const progress = useSharedValue(0);
+    const [progress, setProgress] = useState(0);
+    // const progress = useSharedValue(0);
     const [currentQuestionIndex, setCurrentQuestionIndex ] = useState(0);
     
 
-    const progressAnimation = interpolate(progress, [0, examQuestions.length], ["0%", "100%"]);
+    // const progressAnimation = interpolate(progress, [0, examQuestions.length], ["0%", "100%"]);
 
     const handlePrev = () => {
+        setProgress(currentQuestionIndex - (examQuestions.length / 100))
         setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
 
     const handleNext = () => {
+        setProgress(currentQuestionIndex + (examQuestions.length / 100))
         setCurrentQuestionIndex(currentQuestionIndex + 1)
     }
 
@@ -47,11 +50,10 @@ export default function Questions() {
                     <Timer hours={2} minutes={30} seconds={0} />
                 </View>
             </View>
-            <View style={[styles.progressBar, global.columnAlignCenter]}>
-                <Animated.View style={[styles.progress, { width: progressAnimation }]} >
 
-                </Animated.View>
-            </View>
+            <Progress.Bar progress={progress} 
+                animationConfig={{ bounciness: 10 }}
+                width={500} height={12} borderWidth={0} color={COLORS.brandGreen} unfilledColor={COLORS.nutralColor} />
 
             <ImageBackground source={{uri: Asset.fromModule(require("../assets/images/pattern.png")).uri}} resizeMode="repeat" style={{  flex: 1, width: "100%"}}>
 

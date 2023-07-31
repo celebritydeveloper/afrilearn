@@ -75,7 +75,7 @@ export default function Home() {
                         <View style={[styles.assessmentIcon, global.rowCenter]}>
                             <BarChartIcon />
                         </View>
-                        <View>
+                        <View style={{ maxWidth: 240 }}>
                             <Text style={styles.assessmentTitle}>Take assessment test</Text>
                             <Text style={styles.assessmentSubTitle}>See how you perform against all learners</Text>
                         </View>
@@ -277,6 +277,7 @@ const styles = StyleSheet.create({
         color: COLORS.nutralColor,
         fontSize: 14,
         fontFamily: "Andika_400Regular",
+        lineHeight: 15
         
     },
 

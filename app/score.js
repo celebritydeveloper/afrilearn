@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: 35,
         width: 53
-        
     },
 
     title: {
