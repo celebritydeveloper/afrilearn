@@ -70,8 +70,6 @@ export default function Questions() {
                         <Iconify icon="humbleicons:user-asking" size={35} color={COLORS.blue} />
                     </View>
 
-                    <Link href="/notes">Hello</Link>
-
                 </ScrollView>
             </ImageBackground>
 

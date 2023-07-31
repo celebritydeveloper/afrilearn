@@ -206,7 +206,7 @@ export default function Note() {
                     </View>
 
                     <View style={[styles.buttonContainer]}>
-                        <Pressable style={[styles.button, global.rowCenter]}>
+                        <Pressable style={[styles.button, global.rowCenter]} onPress={() => router.push("/score")}>
                             <Text style={styles.buttonText}>Load more</Text>
                         </Pressable>
                     </View>
